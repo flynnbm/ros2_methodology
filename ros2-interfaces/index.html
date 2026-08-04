@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Overview - ROS 2 Methodology</title>
+<link href="../css/theme.css" rel="stylesheet"/>
+<link href="../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Overview";
+        var mkdocs_page_input_path = "ros2-interfaces/index.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href=".."> ROS 2 Methodology
+        </a><div role="search">
+<form action="../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../philosophy/">Philosophy</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Overview</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#choosing-an-interface">Choosing an interface</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#brief-examples">Brief examples</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interface-guidance-and-complete-examples">Interface guidance and complete examples</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="publishers/">Publishers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="subscribers/">Subscribers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="services/">Services</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/wrapping-a-library/">Wrapping a Library</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/gpd/">GPD</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/moveit/">MoveIt</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="..">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href=".."></a></li>
+<li class="breadcrumb-item">ROS 2 Interfaces</li>
+<li class="breadcrumb-item active">Overview</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="ros-2-interfaces">ROS 2 Interfaces<a class="headerlink" href="#ros-2-interfaces" title="Permanent link">¶</a></h1>
+<p>ROS 2 provides several ways for components to communicate. Although more than one
+approach can often be made to work, there is usually one that expresses the
+interaction more clearly and with less unnecessary machinery. The goal is to use
+the simplest interface that provides the behavior the component actually needs.</p>
+<p>ROS 2 officially groups these approaches as
+<a href="https://docs.ros.org/en/jazzy/Concepts/Basic/Interfaces-Topics-Services-Actions.html">topics, services, and actions</a>.
+This section focuses on selecting among those interface types based on how
+components need to interact.</p>
+<p>The first distinction is between a stream of information and a request to perform
+work. <a href="publishers/">Publishers</a> and <a href="subscribers/">subscribers</a> communicate
+through topics, which are well suited to ongoing data and events. <a href="services/">Services</a>
+and <a href="actions/">actions</a> connect a specific request to a response or result, which
+makes them better suited to operations initiated by a client.</p>
+<h2 id="choosing-an-interface">Choosing an interface<a class="headerlink" href="#choosing-an-interface" title="Permanent link">¶</a></h2>
+<p>Start by asking what the client needs to know:</p>
+<ul>
+<li>Is information produced continuously or whenever it becomes available?</li>
+<li>Is a response required for a specific request?</li>
+<li>Could the work take long enough that progress feedback would be useful?</li>
+<li>Must the client be able to cancel work that is already running?</li>
+<li>Does the information need to go to one place, or should several parts of the
+  system be able to receive it?</li>
+</ul>
+<p>The answers generally lead to the following choices:</p>
+<div class="admonition info">
+<p class="admonition-title">Explore the interface types</p>
+<p>Compare what each interface is good at, where it falls short, and what to use
+instead. If the full table is not visible, scroll horizontally to see the
+remaining columns.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Communication style</th>
+<th>What it is good at</th>
+<th>What it is not good at</th>
+<th>Consider instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Topic: <a href="publishers/">publisher</a> and <a href="subscribers/">subscriber</a></strong></td>
+<td>One-to-many asynchronous stream</td>
+<td>Continuous sensor data, state updates, and events with loose coupling</td>
+<td>Connecting a request to its result, confirming that work completed, or providing built-in cancellation</td>
+<td>Use a <strong>service</strong> for a short request and response, or an <strong>action</strong> for longer goal-oriented work</td>
+</tr>
+<tr>
+<td><strong><a href="services/">Service</a></strong></td>
+<td>One-to-one request/response</td>
+<td>A bounded request that returns one response, especially when the work is quick and the client can apply a timeout</td>
+<td>Long or unpredictable work, progress updates, and canceling work already in progress</td>
+<td>Use an <strong>action</strong> when the client needs feedback or cancellation; use a <strong>topic</strong> for an ongoing stream</td>
+</tr>
+<tr>
+<td><strong><a href="actions/">Action</a></strong></td>
+<td>One-to-one asynchronous goal, feedback, and result</td>
+<td>Goal-oriented work that may take time and needs a result, progress feedback, or cancellation</td>
+<td>Simple lookups and quick operations where goal management adds unnecessary complexity; continuous data streams</td>
+<td>Use a <strong>service</strong> for a simple request and response, or a <strong>topic</strong> for continuously produced data</td>
+</tr>
+</tbody>
+</table>
+<p>A subscriber can receive progress-like messages without blocking, but a topic does
+not by itself connect those messages to a particular request like with a service, or provide the goal,
+result, and cancellation behavior of an action.</p>
+<h2 id="brief-examples">Brief examples<a class="headerlink" href="#brief-examples" title="Permanent link">¶</a></h2>
+<ul>
+<li>A camera continuously publishing images and depth data is a natural fit for a
+  topic, with any interested components acting as subscribers.</li>
+<li>A client requesting a quick calculation and waiting for one result may only need
+  a service.</li>
+<li>A client requesting robot motion or another longer operation may need an action
+  so that it can monitor progress, receive the final result, and cancel safely.</li>
+<li>A one-way command may fit a topic when no confirmation is needed. If the client
+  must know whether the command was accepted or completed, a service or action
+  expresses that requirement more clearly.</li>
+</ul>
+<h2 id="interface-guidance-and-complete-examples">Interface guidance and complete examples<a class="headerlink" href="#interface-guidance-and-complete-examples" title="Permanent link">¶</a></h2>
+<p>The pages in this section briefly explain how to create each interface and identify
+the decisions that matter when using it. They are intended as focused references,
+with links to the corresponding official ROS 2 documentation.</p>
+<p>The <a href="../examples/">Examples</a> section is reserved for complete integrations.
+Those pages can show how an interface is used by a real component, explain why it
+was selected, and cover configuration, execution, results, and failure handling in
+the context of a working pipeline.</p>
+<div class="admonition note">
+<p class="admonition-title">The central idea</p>
+<p>Choose the least complex interface that still represents the interaction.
+Use topics for streams and events, services for short request/response
+work, and actions when a goal needs feedback, cancellation, or a result after
+longer-running work.</p>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../philosophy/" title="Philosophy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="publishers/" title="Publishers">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../philosophy/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="publishers/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "..";</script>
+<script src="../js/theme_extra.js"></script>
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+</body>
+</html>

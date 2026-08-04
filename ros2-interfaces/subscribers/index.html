@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Subscribers - ROS 2 Methodology</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Subscribers";
+        var mkdocs_page_input_path = "ros2-interfaces/subscribers.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> ROS 2 Methodology
+        </a><div role="search">
+<form action="../../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../philosophy/">Philosophy</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../publishers/">Publishers</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Subscribers</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#where-subscribers-fit">Where subscribers fit</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#minimal-setup">Minimal setup</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#questions-to-answer">Questions to answer</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#further-considerations-qos">Further considerations (QoS)</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-subscriber-inside-a-service">A subscriber inside a service</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flexbe-as-an-example">FlexBE as an example</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../services/">Services</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/wrapping-a-library/">Wrapping a Library</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/gpd/">GPD</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/moveit/">MoveIt</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">ROS 2 Interfaces</li>
+<li class="breadcrumb-item active">Subscribers</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="subscribers">Subscribers<a class="headerlink" href="#subscribers" title="Permanent link">¶</a></h1>
+<div class="mermaid">flowchart LR
+    P[Publisher node] --&gt;|Publishes messages| T[Topic]
+    T --&gt;|Delivers messages| S1[Subscriber node]
+    T --&gt;|Delivers messages| S2[Subscriber node]
+</div>
+<p class="diagram-caption">
+  Topic publisher/subscriber flow reproduced from the
+  <a href="https://docs.ros.org/en/jazzy/Concepts/Basic/Interfaces-Topics-Services-Actions.html">ROS 2 interface overview</a>,
+  licensed under
+  <a href="https://github.com/ros2/ros2_documentation/blob/rolling/LICENSE">CC BY 4.0</a>.
+</p>
+<p>A subscriber listens to a named ROS 2 topic and runs a callback when a matching
+message arrives. It does not ask the publisher to produce that message and does not
+receive a result tied to a particular request.</p>
+<p>Within the client/server language used by this methodology, a subscriber can be
+thought of as <strong>client-like</strong> because it consumes information provided by another
+part of the system. It is not a service or action client, it listens to a
+broadcast and is one of many potential subscribers receiving the same message.</p>
+<h2 id="where-subscribers-fit">Where subscribers fit<a class="headerlink" href="#where-subscribers-fit" title="Permanent link">¶</a></h2>
+<p>Subscribers work well when the orchestration layer needs to observe sensor data,
+state updates, status messages, or events. They are less suitable when the
+orchestration layer needs to start a specific operation, associate updates with
+that request, or receive a clear result. Use a <a href="../services/">service</a> for a short
+request and response, or an <a href="../actions/">action</a> for goal-oriented work with
+feedback or cancellation.</p>
+<p>For simple messages, a subscriber may live directly inside the orchestration layer.
+In that case, as with the publisher example, the topic and message contract provide 
+the abstraction. More involved validation, data transformation, or long-running 
+processing may still belong in an independent component.</p>
+<h2 id="minimal-setup">Minimal setup<a class="headerlink" href="#minimal-setup" title="Permanent link">¶</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><input id="__tabbed_1_2" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">Python (<code>rclpy</code>)</label><label for="__tabbed_1_2">C++ (<code>rclcpp</code>)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<pre class="highlight"><code class="language-python">from std_msgs.msg import String
+
+self.subscription = self.create_subscription(
+    String,
+    "status",
+    self._on_status,
+    10,
+)
+
+def _on_status(self, message):
+    self.get_logger().info(message.data)</code></pre>
+</div>
+<div class="tabbed-block">
+<pre class="highlight"><code class="language-cpp">#include &lt;functional&gt;
+#include &lt;std_msgs/msg/string.hpp&gt;
+
+subscription_ = this-&gt;create_subscription&lt;std_msgs::msg::String&gt;(
+  "status",
+  10,
+  [this](const std_msgs::msg::String &amp; message) {
+    RCLCPP_INFO(this-&gt;get_logger(), "%s", message.data.c_str());
+  });</code></pre>
+</div>
+</div>
+</div>
+<p>These snippets show only the subscription itself. A complete node must also
+initialize ROS 2, create or inherit from a node, and keep the subscription alive
+while messages are being received.</p>
+<h2 id="questions-to-answer">Questions to answer<a class="headerlink" href="#questions-to-answer" title="Permanent link">¶</a></h2>
+<ul>
+<li>What information does the workflow need from the topic?</li>
+<li>What should the workflow do when that information arrives, and what should it do
+  if no message arrives?</li>
+<li>How recent must the information be to remain useful?</li>
+<li>Can the workflow use the message directly, or does it need validation,
+  transformation, or other processing first?</li>
+<li>Is observing the topic enough, or does the workflow need to request work and
+  receive a specific result through a service or action?</li>
+</ul>
+<h2 id="further-considerations-qos">Further considerations (QoS)<a class="headerlink" href="#further-considerations-qos" title="Permanent link">¶</a></h2>
+<p>ROS 2 provides additional controls for how topic data is delivered, including
+Quality of Service settings. Those controls are important in some systems, but
+they are outside the focus of this methodology. The examples in this site will use
+the default settings unless an integration has a specific reason to do otherwise.
+See the official ROS 2
+<a href="https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service documentation</a>
+when delivery reliability, message history, or behavior over unreliable networks
+needs more careful control.</p>
+<h2 id="a-subscriber-inside-a-service">A subscriber inside a service<a class="headerlink" href="#a-subscriber-inside-a-service" title="Permanent link">¶</a></h2>
+<p>The
+<a href="https://github.com/uml-robotics/pcl_ros2/blob/main/src/get_point_cloud_service.cpp"><code>get_point_cloud_service</code></a>
+node shows how subscription can also be an internal step within a separate utility.
+From the orchestration layer's perspective, this node is a service server: a client
+requests a point cloud from a specified topic, in a specified coordinate frame,
+with a timeout.</p>
+<p>Inside the service implementation, the node waits for one point-cloud message:</p>
+<pre class="highlight"><code class="language-cpp">const bool ok = rclcpp::wait_for_message&lt;sensor_msgs::msg::PointCloud2&gt;(
+  cloud, sub, context, timeout);</code></pre>
+<p>After receiving that message, the node uses TF2 to transform the point cloud into
+the requested coordinate frame and returns the transformed data in the service
+response. The sequence can be summarized as:</p>
+<ol>
+<li>Receive a service request.</li>
+<li>Subscribe long enough to capture one point-cloud message.</li>
+<li>Transform the point cloud into the requested frame.</li>
+<li>Return the transformed point cloud as the service result.</li>
+</ol>
+<p>In this practical example the service creates a controlled,
+on-demand operation with a timeout and a specific result, while hiding the details
+of topic subscription and coordinate transformation from the orchestration layer.
+The subscriber is still important, but it is an implementation detail of the
+utility rather than the interface used by the orchestration client.</p>
+<div class="admonition tip">
+<p class="admonition-title">Interface and implementation can differ</p>
+<p>A utility can expose a service or action even when it uses topics internally.
+Choose the public interface based on how clients need to use the capability,
+then use publishers, subscribers, and supporting libraries as needed inside
+the implementation.</p>
+</div>
+<h2 id="flexbe-as-an-example">FlexBE as an example<a class="headerlink" href="#flexbe-as-an-example" title="Permanent link">¶</a></h2>
+<p>The <a href="../../orchestration-layer/flexbe-subscriber-state/">FlexBE Subscriber State</a>
+will show how a subscription can be contained directly within an orchestration
+state and how incoming message data can influence the workflow.</p>
+<p>For complete setup and package instructions, see the official ROS 2 publisher and
+subscriber tutorials for
+<a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html">Python</a>
+and
+<a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html">C++</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">The central idea</p>
+<p>A subscriber observes a stream rather than requesting work. When the
+orchestration layer only needs to receive a simple topic message, placing the
+subscription directly in that layer can be the clearest implementation.</p>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../publishers/" title="Publishers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../services/" title="Services">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../publishers/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../services/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="../../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>mermaid.initialize({});</script></body>
+</html>

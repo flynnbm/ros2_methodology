@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Services - ROS 2 Methodology</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Services";
+        var mkdocs_page_input_path = "ros2-interfaces/services.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> ROS 2 Methodology
+        </a><div role="search">
+<form action="../../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../philosophy/">Philosophy</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../publishers/">Publishers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../subscribers/">Subscribers</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Services</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#where-services-fit">Where services fit</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wrapping-a-library-as-a-service">Wrapping a library as a service</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#minimal-client-request">Minimal client request</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#minimal-service-server">Minimal service server</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#questions-to-answer">Questions to answer</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-pcl-filter-service-as-an-example">A PCL filter service as an example</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/wrapping-a-library/">Wrapping a Library</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/gpd/">GPD</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/moveit/">MoveIt</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">ROS 2 Interfaces</li>
+<li class="breadcrumb-item active">Services</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="services">Services<a class="headerlink" href="#services" title="Permanent link">¶</a></h1>
+<div class="mermaid">sequenceDiagram
+    participant Client as Service client
+    participant Server as Service server
+    Client-&gt;&gt;Server: Request
+    Server--&gt;&gt;Client: Response
+</div>
+<p class="diagram-caption">
+  Service client/server sequence reproduced from the
+  <a href="https://docs.ros.org/en/jazzy/Concepts/Basic/Interfaces-Topics-Services-Actions.html">ROS 2 interface overview</a>,
+  licensed under
+  <a href="https://github.com/ros2/ros2_documentation/blob/rolling/LICENSE">CC BY 4.0</a>.
+</p>
+<p>A ROS 2 service creates a direct client/server relationship. The client sends one
+request to a named service, and the server returns one response associated with
+that request. Unlike a topic broadcast, this interaction gives the client a clear
+place to ask for work and receive its result.</p>
+<p>In this methodology, the service client typically belongs to the orchestration
+layer, while the service server belongs to a separate utility node. The utility
+can wrap an existing library behind a ROS 2 interface, allowing the orchestration
+layer to use the capability without depending on the library's internal API or
+implementation language.</p>
+<h2 id="where-services-fit">Where services fit<a class="headerlink" href="#where-services-fit" title="Permanent link">¶</a></h2>
+<p>Services work well for operations that begin with a specific request, finish in a
+reasonable and predictable amount of time, and return one response. A client can
+make the request asynchronously so that the orchestration layer does not need to
+block while the server performs the work.</p>
+<p>Use a <a href="../publishers/">publisher or subscriber</a> when information should flow as an
+ongoing stream rather than in response to a request. Use an <a href="../actions/">action</a>
+when an operation may take longer, needs progress feedback, or might need to be 
+canceled during execution.</p>
+<h2 id="wrapping-a-library-as-a-service">Wrapping a library as a service<a class="headerlink" href="#wrapping-a-library-as-a-service" title="Permanent link">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">An important concept</p>
+<p>The wrapped library does not need to know anything about the orchestration layer 
+and should also not rely on or make any assumptions about the orchestration layer.</p>
+</div>
+<p>The service server receives ROS 2 request data, converts it into the form expected
+by the library, calls the required library functionality, and converts the result
+into a ROS 2 response. The service definition becomes the contract between
+the client and the utility.</p>
+<p>This separation lets the utility's implementation change without changing the
+orchestration workflow as long as the service contract remains consistent. It
+also allows another orchestration tool or custom script to use the same utility 
+by simply creating a client for that service.</p>
+<h2 id="minimal-client-request">Minimal client request<a class="headerlink" href="#minimal-client-request" title="Permanent link">¶</a></h2>
+<p>The client creates and sends the request. In this methodology, code like this would
+normally be owned by the orchestration layer.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"/><input id="__tabbed_1_2" name="__tabbed_1" type="radio"/><div class="tabbed-labels"><label for="__tabbed_1_1">Python (<code>rclpy</code>)</label><label for="__tabbed_1_2">C++ (<code>rclcpp</code>)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<pre class="highlight"><code class="language-python">from example_interfaces.srv import AddTwoInts
+
+self.client = self.create_client(AddTwoInts, "add_two_ints")
+
+request = AddTwoInts.Request()
+request.a = 2
+request.b = 3
+future = self.client.call_async(request)</code></pre>
+</div>
+<div class="tabbed-block">
+<pre class="highlight"><code class="language-cpp">#include &lt;example_interfaces/srv/add_two_ints.hpp&gt;
+
+using AddTwoInts = example_interfaces::srv::AddTwoInts;
+
+client_ = this-&gt;create_client&lt;AddTwoInts&gt;("add_two_ints");
+
+auto request = std::make_shared&lt;AddTwoInts::Request&gt;();
+request-&gt;a = 2;
+request-&gt;b = 3;
+auto future = client_-&gt;async_send_request(request);</code></pre>
+</div>
+</div>
+</div>
+<p>These snippets show only request creation and submission. A complete client must
+also check that the service is available, handle the response when the future
+completes, and decide what to do if the request fails or exceeds its timeout.</p>
+<h2 id="minimal-service-server">Minimal service server<a class="headerlink" href="#minimal-service-server" title="Permanent link">¶</a></h2>
+<p>The server receives the request, performs the operation, and fills in the response.
+This code belongs to the utility component rather than the orchestration client.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"/><input id="__tabbed_2_2" name="__tabbed_2" type="radio"/><div class="tabbed-labels"><label for="__tabbed_2_1">Python (<code>rclpy</code>)</label><label for="__tabbed_2_2">C++ (<code>rclcpp</code>)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<pre class="highlight"><code class="language-python">from example_interfaces.srv import AddTwoInts
+
+self.service = self.create_service(
+    AddTwoInts,
+    "add_two_ints",
+    self._add_two_ints,
+)
+
+def _add_two_ints(self, request, response):
+    response.sum = request.a + request.b
+    return response</code></pre>
+</div>
+<div class="tabbed-block">
+<pre class="highlight"><code class="language-cpp">#include &lt;example_interfaces/srv/add_two_ints.hpp&gt;
+
+using AddTwoInts = example_interfaces::srv::AddTwoInts;
+
+service_ = this-&gt;create_service&lt;AddTwoInts&gt;(
+  "add_two_ints",
+  [](const std::shared_ptr&lt;AddTwoInts::Request&gt; request,
+     std::shared_ptr&lt;AddTwoInts::Response&gt; response) {
+    response-&gt;sum = request-&gt;a + request-&gt;b;
+  });</code></pre>
+</div>
+</div>
+</div>
+<p>These snippets show only the service callback. A complete server must also
+initialize ROS 2, create or inherit from a node, keep the service alive, and handle
+invalid requests and library failures in a way the client can understand.</p>
+<h2 id="questions-to-answer">Questions to answer<a class="headerlink" href="#questions-to-answer" title="Permanent link">¶</a></h2>
+<ul>
+<li>What capability is the service making available?</li>
+<li>What information must the client provide, and what result does it need back?</li>
+<li>What does success or failure mean to the client?</li>
+<li>How long should the operation normally take, and how long should the client wait?</li>
+<li>Can the operation finish without progress feedback or cancellation? If not,
+  should it be an action instead?</li>
+</ul>
+<h2 id="a-pcl-filter-service-as-an-example">A PCL filter service as an example<a class="headerlink" href="#a-pcl-filter-service-as-an-example" title="Permanent link">¶</a></h2>
+<p>The
+<a href="https://github.com/uml-robotics/pcl_ros2/blob/main/src/voxel_grid_filter_service.cpp"><code>voxel_grid_filter_service</code></a>
+is a compact example of wrapping one piece of library functionality in a ROS 2
+service server. The underlying Point Cloud Library (PCL) provides the voxel-grid
+filter, while the <code>pcl_ros2</code> wrapped node provides the ROS 2 interface used by the rest of
+the pipeline.</p>
+<p>The service performs one focused sequence:</p>
+<ol>
+<li>Receive a ROS 2 service request containing a <code>sensor_msgs/PointCloud2</code> message
+   and the settings needed by the filter.</li>
+<li>Convert the ROS 2 point-cloud message into a PCL point-cloud object.</li>
+<li>Apply the PCL voxel-grid filter to downsample the cloud.</li>
+<li>Convert the filtered PCL object back into a ROS 2 point-cloud message.</li>
+<li>Return that message in the service response.</li>
+</ol>
+<p>This server does not reimplement the voxel-grid algorithm. It creates a stable ROS
+2 boundary around existing PCL functionality and handles the conversion between
+ROS 2 and PCL data types. The orchestration client only needs to understand the
+service request and response; it does not need to include PCL, manage PCL objects,
+or know how the filter is implemented.</p>
+<p>The example also illustrates why a small wrapper can still be a useful independent
+component. Although the underlying operation is simple, placing it behind a
+service allows the same filter utility to be requested by FlexBE, another
+orchestration tool, or custom code without moving PCL-specific logic into any of
+those clients.</p>
+<p>Wrapping a small operation this way does add service-call and data-conversion
+overhead. In the pipelines described here, that cost has been negligible compared
+with the flexibility it provides: filters can be chained, reordered, or inspected
+individually by publishing intermediate results. This makes it easier to identify
+which operation changed the data or where useful information was lost. The
+<a href="../../orchestration-layer/#composing-utility-pipelines">Orchestration Layer</a>
+section introduces this intentional trade-off and will explore it in more detail.</p>
+<p>For complete package and node setup, see the official ROS 2 service and client
+tutorials for
+<a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client.html">Python</a>
+and
+<a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Service-And-Client.html">C++</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">The central idea</p>
+<p>The orchestration layer owns the service client, and the utility owns the
+service server. The server wraps the useful work behind a stable ROS 2 request
+and response, allowing either side to change without tightly coupling the
+orchestration workflow to the underlying library.</p>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../subscribers/" title="Subscribers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../actions/" title="Actions">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../subscribers/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../actions/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="../../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>mermaid.initialize({});</script></body>
+</html>

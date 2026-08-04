@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Philosophy - ROS 2 Methodology</title>
+<link href="../css/theme.css" rel="stylesheet"/>
+<link href="../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Philosophy";
+        var mkdocs_page_input_path = "philosophy.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href=".."> ROS 2 Methodology
+        </a><div role="search">
+<form action="../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Philosophy</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#strategy">Strategy</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#design-principles">Design principles</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros2-interfaces/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2-interfaces/publishers/">Publishers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2-interfaces/subscribers/">Subscribers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2-interfaces/services/">Services</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2-interfaces/actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/wrapping-a-library/">Wrapping a Library</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ros-wrapping/interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/gpd/">GPD</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/moveit/">MoveIt</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="..">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href=".."></a></li>
+<li class="breadcrumb-item active">Philosophy</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="philosophy">Philosophy<a class="headerlink" href="#philosophy" title="Permanent link">¶</a></h1>
+<p>Robot manipulation pipelines often combine perception, planning, control, and
+other specialized utilities. These capabilities may be coordinated by a state
+machine, behavior tree, graphical workflow tool, custom script, or another form of
+orchestration.</p>
+<div class="admonition warning">
+<p class="admonition-title">A core consideration</p>
+<p><strong>The choice of orchestrator should not determine whether a useful component
+can participate in the pipeline.</strong></p>
+</div>
+<p>This methodology therefore treats orchestration and implementation as separate
+architectural concerns. The orchestration layer decides <strong>when</strong> work should occur
+and owns the clients used to request that work. Modular components decide <strong>how</strong>
+the work is performed and expose their capabilities through ROS 2 service or action
+servers. Communication then takes place through the ROS 2 interface.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">¶</a></h2>
+<p>Tightly coupling a utility to one orchestration tool limits where it can be reused.
+It can also force teams to adopt unfamiliar tooling before they can benefit from
+the underlying capability. A stable ROS 2 interface creates a boundary between
+these choices: one team can use FlexBE while another uses MoveIt Pro, OmniGraph,
+Simulink, or custom code, without requiring a different implementation of the
+utility for each environment.</p>
+<p>This separation also allows the two sides to evolve independently. An orchestration
+workflow can be reorganized without rewriting the utility, and the utility's
+internal library or algorithm can change without redesigning every pipeline that
+uses it, provided that its interface contract remains stable.</p>
+<h2 id="strategy">Strategy<a class="headerlink" href="#strategy" title="Permanent link">¶</a></h2>
+<p>The strategy is to wrap a focused capability as a ROS 2 component and expose the
+operations needed by the rest of the system through explicit interfaces. The
+orchestration layer then interacts with that component as a client.</p>
+<p>The interface should describe the capability rather than the workflow that happens
+to use it. Requests, results, feedback, failure states, timeouts, and cancellation
+behavior should be defined at this boundary. This gives any compatible client the
+information it needs without embedding higher-level pipeline decisions in the
+component itself.</p>
+<p>In practical terms, the required interaction helps determine which interface to
+use. If a client only needs to send a request, wait for a result, and stop waiting
+after a chosen timeout, a ROS 2 <a href="../ros2-interfaces/services/">service</a> may be enough.
+If the work may take longer and the client needs progress feedback or the ability
+to cancel it while it is running, a ROS 2 <a href="../ros2-interfaces/actions/">action</a> is
+usually a better fit. Defining those needs explicitly keeps the interface no more
+complex than the capability requires.</p>
+<h2 id="design-principles">Design principles<a class="headerlink" href="#design-principles" title="Permanent link">¶</a></h2>
+<ul>
+<li>Make it clear what each part of the system does, how other parts communicate with
+  it, and which part is responsible for each decision.</li>
+<li>Do not make a reusable utility depend on the tool used to coordinate the larger
+  workflow.</li>
+<li>Where practical, keep the code that performs the useful work separate from the
+  ROS 2 code that communicates with the rest of the system.</li>
+<li>Use the simplest ROS 2 interface that meets the needs of the task.</li>
+<li>Make it possible to tell when work succeeds, fails, or takes too long. When
+  appropriate, also make progress, cancellation, and recovery visible.</li>
+<li>Give each component a focused purpose so that it can be built, tested, replaced,
+  and reused on its own.</li>
+<li>Treat the examples as illustrations of possible design choices, not as
+  requirements to use the same tools.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">The central idea</p>
+<p>The orchestration layer owns the clients; modular utilities own the service or
+action servers. As long as both sides honor the ROS 2 interface, an orchestrator
+can be changed without redesigning the utilities, and a utility can be reused
+across pipelines without depending on how those pipelines are coordinated.</p>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href=".." title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../ros2-interfaces/" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href=".." style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../ros2-interfaces/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "..";</script>
+<script src="../js/theme_extra.js"></script>
+<script src="../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+</body>
+</html>

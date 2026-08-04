@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>MoveIt - ROS 2 Methodology</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "MoveIt";
+        var mkdocs_page_input_path = "examples/moveit.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> ROS 2 Methodology
+        </a><div role="search">
+<form action="../../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../philosophy/">Philosophy</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/publishers/">Publishers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/subscribers/">Subscribers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/services/">Services</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/wrapping-a-library/">Wrapping a Library</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros-wrapping/interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gpd/">GPD</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">MoveIt</a>
+<ul class="current">
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">Examples</li>
+<li class="breadcrumb-item active">MoveIt</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="moveit">MoveIt<a class="headerlink" href="#moveit" title="Permanent link">¶</a></h1>
+<p>Use this example to document planning-scene setup, robot state, planning requests,
+execution, and recovery.</p>
+<p>Show a representative motion task and enough setup context for readers to
+distinguish configuration concerns from application logic. Direct readers to the
+linked repositories for installation, workspace construction, and launch
+instructions.</p>
+<div class="admonition note">
+<p class="admonition-title">TODO: Planned coverage</p>
+<p>Expand this example to include:</p>
+<ul>
+<li>MoveIt and robot requirements, versions, and configuration context</li>
+<li>A high-level view of the launch and setup sequence</li>
+<li>Links to repositories containing detailed setup and execution instructions</li>
+<li>Planning-scene and current robot-state setup</li>
+<li>MoveGroup action-client setup and complete goal construction</li>
+<li>Feedback, result, and cancellation handling</li>
+<li>Motion execution, failure handling, and recovery</li>
+<li>A representative motion task, with visuals, that helps separate
+  configuration issues from application-logic issues</li>
+<li>Known compatibility constraints and observed failure modes</li>
+<li>Links showing how the action server, orchestration client, and broader
+  pipeline responsibilities connect across the methodology</li>
+</ul>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../gpd/" title="GPD"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../gpd/" style="color: #fcfcfc">« Previous</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="../../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+</body>
+</html>

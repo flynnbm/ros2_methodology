@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Wrapping a Library - ROS 2 Methodology</title>
+<link href="../../css/theme.css" rel="stylesheet"/>
+<link href="../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Wrapping a Library";
+        var mkdocs_page_input_path = "ros-wrapping/wrapping-a-library.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> ROS 2 Methodology
+        </a><div role="search">
+<form action="../../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../philosophy/">Philosophy</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/publishers/">Publishers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/subscribers/">Subscribers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/services/">Services</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2-interfaces/actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Wrapping a Library</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#suggested-workflow">Suggested workflow</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gpd-as-a-wrapping-example">GPD as a wrapping example</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/gpd/">GPD</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/moveit/">MoveIt</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../.."></a></li>
+<li class="breadcrumb-item">ROS Wrapping</li>
+<li class="breadcrumb-item active">Wrapping a Library</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="wrapping-a-library">Wrapping a Library<a class="headerlink" href="#wrapping-a-library" title="Permanent link">¶</a></h1>
+<h2 id="suggested-workflow">Suggested workflow<a class="headerlink" href="#suggested-workflow" title="Permanent link">¶</a></h2>
+<ol>
+<li>Identify the smallest useful domain API.</li>
+<li>Decide which calls map to topics, services, or actions.</li>
+<li>Define conversions between ROS messages and domain types.</li>
+<li>Keep lifecycle, threading, and error translation explicit.</li>
+<li>Test the domain adapter separately from the ROS node.</li>
+<li>Add launch, configuration, and integration tests.</li>
+</ol>
+<p>Record constraints such as native dependencies, device access, and supported
+platforms alongside the wrapper.</p>
+<h2 id="gpd-as-a-wrapping-example">GPD as a wrapping example<a class="headerlink" href="#gpd-as-a-wrapping-example" title="Permanent link">¶</a></h2>
+<p>The <a href="https://github.com/flynnbm/gpd_ros/tree/jazzy"><code>gpd_ros</code> Jazzy branch</a> is a
+useful example of placing a ROS 2 boundary around software that did not originate
+as a ROS component. The underlying Grasp Pose Detection (GPD) library is a C++
+library built with CMake. The wrapper package builds on that library and exposes
+its capabilities through ROS interfaces so they can participate in a larger ROS 2
+manipulation pipeline.</p>
+<p>The original <code>gpd_ros</code> package provided a ROS 1 wrapper. The Jazzy branch of this
+fork updates that integration for ROS 2 while continuing to use the same
+underlying GPD functionality. Both the original wrapper and these added utilities
+are implemented in C++, matching the library they call, but clients interact with
+their ROS interfaces rather than directly with the GPD API.</p>
+<p>At a high level, the current pipeline separates two responsibilities:</p>
+<ol>
+<li><code>grasp_detection_server</code> accepts a point cloud, invokes GPD, and returns the
+   detected <code>gpd::GraspPoseList</code> data through its service interface.</li>
+<li><code>grasp_pose_server</code> converts the detected grasp poses through the required
+   matrix transformations into <code>geometry_msgs::PoseStamped</code> messages that can be
+   passed to MoveIt as six-degree-of-freedom grasp poses.</li>
+</ol>
+<p>This example demonstrates more than updating a ROS 1 package to ROS 2. It shows
+that a separately built, non-ROS library can remain responsible for its domain
+functionality while ROS 2 acts as the middleware between that functionality and
+the rest of the pipeline. The wrapper owns the conversions and interface boundary;
+the orchestration layer and downstream MoveIt components do not need to understand
+the library's build system or internal types.</p>
+<div class="admonition note">
+<p class="admonition-title">TODO: Develop this case study</p>
+<p>Expand this example with the relationship between the GPD library and wrapper
+builds, dependency declarations, CMake integration, ROS 1-to-ROS 2 changes,
+service definitions, message conversions, and the path from point-cloud input
+to a MoveIt-compatible pose. Also discuss whether the two current servers
+should remain separate or be combined behind one utility interface.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">TODO: Planned coverage</p>
+<p>Expand this workflow with:</p>
+<ul>
+<li>A small library capability carried through each wrapping step</li>
+<li>Guidance for deciding what belongs inside and outside the wrapper</li>
+<li>Topic, service, and action selection examples</li>
+<li>Message conversion and coordinate-frame responsibilities</li>
+<li>Error translation, timeouts, cancellation, and cleanup</li>
+<li>Links to the examples</li>
+</ul>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../package-layout/" title="Package Layout">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../package-layout/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../..";</script>
+<script src="../../js/theme_extra.js"></script>
+<script src="../../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="../../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+</body>
+</html>

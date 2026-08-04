@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Practical patterns and conventions for building maintainable ROS 2 systems." name="description"/>
+<link href="img/favicon.ico" rel="shortcut icon"/>
+<title>ROS 2 Methodology</title>
+<link href="css/theme.css" rel="stylesheet"/>
+<link href="css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<link href="stylesheets/extra.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="."> ROS 2 Methodology
+        </a><div role="search">
+<form action="./search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-this-site">How to use this site</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="philosophy/">Philosophy</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS 2 Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros2-interfaces/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros2-interfaces/publishers/">Publishers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros2-interfaces/subscribers/">Subscribers</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros2-interfaces/services/">Services</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros2-interfaces/actions/">Actions</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ROS Wrapping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ros-wrapping/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros-wrapping/wrapping-a-library/">Wrapping a Library</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros-wrapping/package-layout/">Package Layout</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros-wrapping/interface-design/">Interface Design</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Orchestration Layer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="orchestration-layer/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal">FlexBE as an Example</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="orchestration-layer/flexbe-publisher-state/">Publisher State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orchestration-layer/flexbe-subscriber-state/">Subscriber State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orchestration-layer/flexbe-service-state/">Service State</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="orchestration-layer/flexbe-action-state/">Action State</a>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/">Overview</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/realsense/">Realsense</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/gpd/">GPD</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/moveit/">MoveIt</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href=".">ROS 2 Methodology</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="."></a></li>
+<li class="breadcrumb-item active">Home</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="ros-2-methodology">ROS 2 Methodology<a class="headerlink" href="#ros-2-methodology" title="Permanent link">¶</a></h1>
+<div class="mermaid">%%{init: {"flowchart": {"rankSpacing": 32, "nodeSpacing": 45, "padding": 12}}}%%
+flowchart TB
+    subgraph Orchestration[" "]
+        direction TB
+        subgraph OrchestrationOptions[" "]
+            direction LR
+            FlexBE["FlexBE"]
+            MoveItPro["MoveIt Pro"]
+            OmniGraph["OmniGraph"]
+            Simulink["Simulink"]
+            OrchestrationEtc["Etc."]
+        end
+
+        FlexBE --&gt; Clients["ROS 2 interfaces<br/>Service and action clients"]
+        MoveItPro --&gt; Clients
+        OmniGraph --&gt; Clients
+        Simulink --&gt; Clients
+        OrchestrationEtc --&gt; Clients
+    end
+
+    subgraph Utilities[" "]
+        direction TB
+        GraspPlanner["Grasp Planner"]
+        Perception["Perception"]
+        MoveIt["MoveIt"]
+        UtilityEtc["Etc."]
+    end
+
+    Clients &lt;--&gt; GraspPlanner
+    Clients &lt;--&gt; Perception
+    Clients &lt;--&gt; MoveIt
+    Clients &lt;--&gt; UtilityEtc
+
+    classDef orchestration fill:#f3f8fd,stroke:#1757a6,stroke-width:2px,color:#123c85;
+    classDef utility fill:#f8fdfd,stroke:#087f83,stroke-width:2px,color:#08777a;
+    class FlexBE,MoveItPro,OmniGraph,Simulink,OrchestrationEtc,Clients orchestration;
+    class GraspPlanner,Perception,MoveIt,UtilityEtc utility;
+    style OrchestrationOptions fill:transparent,stroke:transparent;
+    style Orchestration fill:#fbfdff,stroke:#1757a6,stroke-width:2px;
+    style Utilities fill:#f8fdfd,stroke:#087f83,stroke-width:2px;
+</div>
+<div class="admonition warning">
+<p class="admonition-title">A work in progress</p>
+<p>The details/layout of this diagram will change as the documentation develops, but this
+space will continue to provide a visual overview of the relationship between
+orchestration clients and modular utility servers.</p>
+</div>
+<p>This site documents a methodology for designing, creating, and integrating modular
+ROS 2-wrapped components into larger pipelines, with an initial focus on robot
+manipulation using MoveIt. It uses working components to examine the choices behind
+their design and to illustrate how responsibilities are divided, how interfaces are
+selected, and how each component can remain reusable outside a single pipeline.</p>
+<p>The methodology intentionally separates these components from the orchestration
+layer that coordinates them. A component exposed through a ROS 2 service or action
+can be called by a state machine, behavior tree, graphical workflow tool, custom
+script, or any other compatible client. FlexBE is used in this site to demonstrate
+one working approach to orchestration, not as a requirement or recommendation.</p>
+<p>The goal is not to prescribe one step-by-step implementation or a specific way to
+orchestrate a pipeline. Instead, the site captures the reasoning behind concrete
+examples so that it can inform decisions when evaluating an existing component or
+designing a new one.</p>
+<h2 id="how-to-use-this-site">How to use this site<a class="headerlink" href="#how-to-use-this-site" title="Permanent link">¶</a></h2>
+<ul>
+<li>Start with <strong><a href="philosophy/">Philosophy</a></strong> for the principles and design goals that guide the
+  methodology.</li>
+<li>Use <strong><a href="ros2-interfaces/">ROS 2 Interfaces</a></strong> to compare topics,
+  services, and actions and understand the implications of choosing one.</li>
+<li>Use <strong><a href="ros-wrapping/">ROS Wrapping</a></strong> to explore how existing libraries can be exposed as modular
+  ROS components.</li>
+<li>Use <strong><a href="orchestration-layer/">Orchestration Layer</a></strong> to examine how higher-level
+  workflows can coordinate otherwise independent components. FlexBE is presented
+  as one example; other tools or custom code can coordinate the same components.</li>
+<li>Use <strong><a href="examples/">Examples</a></strong> to see existing components, the choices made in their design,
+  and how they participate in complete integrations.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">A work in progress</p>
+<p>Some of these sections are still under development, check back for future updates as
+further documentation is added.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">The central idea</p>
+<p>Build utilities around explicit ROS 2 service and action interfaces, then let
+the orchestration layer interact with them as a client. This keeps the
+components reusable whether a pipeline is coordinated with FlexBE, another
+orchestration tool, or custom code. The examples in this site illustrate the
+reasoning behind that separation rather than prescribe a single implementation.</p>
+</div>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-right" href="philosophy/" title="Philosophy">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="philosophy/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>var base_url = ".";</script>
+<script src="js/theme_extra.js"></script>
+<script src="js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+<script src="search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+<script>mermaid.initialize({});</script></body>
+</html>
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-08-04 19:33:52.221811+00:00
+-->
