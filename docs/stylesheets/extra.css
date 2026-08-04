@@ -1,0 +1,102 @@
+/* Soft visual separation between major subsections throughout the site. */
+.rst-content h2 {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #d9dde3;
+}
+
+.diagram-caption {
+  margin-top: 1rem;
+  color: #6b7280;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.rst-content .mermaid {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.rst-content .mermaid svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.rst-content .mermaid .nodeLabel,
+.rst-content .mermaid .nodeLabel p {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Python/C++ code tabs for the Read the Docs theme. */
+.tabbed-alternate {
+  display: flex;
+  flex-direction: column;
+  margin: 1.25em 0;
+}
+
+.tabbed-alternate > input {
+  display: none;
+}
+
+.tabbed-alternate > .tabbed-labels {
+  display: flex;
+  gap: 0.2rem;
+  overflow-x: auto;
+  border-bottom: 2px solid #e2aa42;
+}
+
+.tabbed-alternate > .tabbed-labels > label {
+  margin: 0;
+  padding: 0.55rem 1rem;
+  color: #5c470e;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #fff4cf;
+  border: 1px solid #efd58a;
+  border-bottom: 0;
+  border-radius: 0.25rem 0.25rem 0 0;
+  cursor: pointer;
+}
+
+.tabbed-alternate > .tabbed-labels > label:hover {
+  background: #ffe9a8;
+}
+
+.tabbed-alternate > .tabbed-content {
+  width: 100%;
+}
+
+.tabbed-alternate > .tabbed-content > .tabbed-block {
+  display: none;
+}
+
+.tabbed-alternate > input:nth-child(1):checked ~ .tabbed-labels > label:nth-child(1),
+.tabbed-alternate > input:nth-child(2):checked ~ .tabbed-labels > label:nth-child(2),
+.tabbed-alternate > input:nth-child(3):checked ~ .tabbed-labels > label:nth-child(3),
+.tabbed-alternate > input:nth-child(4):checked ~ .tabbed-labels > label:nth-child(4) {
+  color: #3f3007;
+  background: #ffd970;
+  border-color: #e2aa42;
+}
+
+.tabbed-alternate > input:nth-child(1):checked ~ .tabbed-content > .tabbed-block:nth-child(1),
+.tabbed-alternate > input:nth-child(2):checked ~ .tabbed-content > .tabbed-block:nth-child(2),
+.tabbed-alternate > input:nth-child(3):checked ~ .tabbed-content > .tabbed-block:nth-child(3),
+.tabbed-alternate > input:nth-child(4):checked ~ .tabbed-content > .tabbed-block:nth-child(4) {
+  display: block;
+}
+
+@media print {
+  .tabbed-alternate > .tabbed-labels {
+    display: none;
+  }
+
+  .tabbed-alternate > .tabbed-content > .tabbed-block {
+    display: block;
+  }
+}

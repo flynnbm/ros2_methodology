@@ -1,0 +1,60 @@
+site_name: ROS 2 Methodology
+site_description: Practical patterns and conventions for building maintainable ROS 2 systems.
+
+theme:
+  name: readthedocs
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
+
+plugins:
+  - search
+  - mermaid2
+
+nav:
+  - Home: index.md
+  - Philosophy: philosophy.md
+  - ROS 2 Interfaces:
+      - Overview: ros2-interfaces/index.md
+      - Publishers: ros2-interfaces/publishers.md
+      - Subscribers: ros2-interfaces/subscribers.md
+      - Services: ros2-interfaces/services.md
+      - Actions: ros2-interfaces/actions.md
+  - ROS Wrapping:
+      - Overview: ros-wrapping/index.md
+      - Wrapping a Library: ros-wrapping/wrapping-a-library.md
+      - Package Layout: ros-wrapping/package-layout.md
+      - Interface Design: ros-wrapping/interface-design.md
+  - Orchestration Layer:
+      - Overview: orchestration-layer/index.md
+      - FlexBE as an Example:
+          - Publisher State: orchestration-layer/flexbe-publisher-state.md
+          - Subscriber State: orchestration-layer/flexbe-subscriber-state.md
+          - Service State: orchestration-layer/flexbe-service-state.md
+          - Action State: orchestration-layer/flexbe-action-state.md
+  - Examples:
+      - Overview: examples/index.md
+      - Realsense: examples/realsense.md
+      - GPD: examples/gpd.md
+      - MoveIt: examples/moveit.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - fenced_code
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+strict: true
