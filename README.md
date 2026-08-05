@@ -23,3 +23,8 @@ mkdocs build
 
 The generated site is written to `site/`, which is intentionally ignored by Git.
 Navigation and site settings live in `mkdocs.yml`.
+
+## Published with GitHub Pages
+
+The published site will be available at
+<https://flynnbm.github.io/ros2_methodology/>.
